@@ -6,14 +6,16 @@
     // on ne connait pas sa definition
 
 //Class Final qui ne peut pas avoir de classe fille(Impossible d'avoir une relation de specialisation )
-abstract class Personne{
+namespace App\Model;
+use App\Core\Model;
+
+abstract class Personne extends Model{
     // Attribut d'instance
     protected int $id;
     protected string $nomComplet;
-    protected string $role;
+    protected static string $role;
 
     //Attribut de classe ou static
-    private static int $nbrePersonne;
 
     // Constructeur Par defaut
     public function __construct()
@@ -31,13 +33,6 @@ abstract class Personne{
         return $this ->nomComplet;
     }
 
-    /**
-     * Get the value of nbrePersonne
-     */ 
-    public static function getNbrePersonne():int 
-    {
-        return self::$nbrePersonne;
-    }
 
     //Setters
     public function setId(int $id) : self {
@@ -49,14 +44,31 @@ abstract class Personne{
         $this ->nomComplet = $nomComplet;
         return $this;
     }
+
     /**
-     * Set the value of nbrePersonne
+     * Get the value of role
+     */ 
+    public static function getRole()
+    {
+        return self::$role='';
+    }
+
+    /**
+     * Set the value of role
      *
      * @return  self
      */ 
-    public static function setNbrePersonne(int $nbrePersonne):void
+    public function setRole($role)
     {
-        self :: $nbrePersonne = $nbrePersonne;
+        $this->role = $role;
+
+        return $this;
     }
+
+    /* public static function findAll():array
+    {
+        $sql = "select `nom_complet`,`role`,`grade` from ? where role ?";
+        return parent::findBy($sql,[parent::table(),self::getRole()]);
+    } */
 }
 

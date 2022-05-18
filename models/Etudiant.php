@@ -1,4 +1,8 @@
 <?php
+namespace App\Model;
+
+use App\Core\Constantes;
+
 class Etudiant extends Users
 {
     private string $matricule;
@@ -7,7 +11,7 @@ class Etudiant extends Users
 
     public function __construct()
     {
-        $this -> role= "ROLE_ETUDIANT";
+        parent:: $role= Constantes::ETUDIANT;
     }
 
 
@@ -70,4 +74,15 @@ class Etudiant extends Users
 
         return $this;
     }
+    public function insert():int
+    {
+        $db=parent::database();
+        $db->connexionBD();
+        //Requete non preparee:variable injectee lors de l'ecriture de la requete
+            $sql="INSERT INTO `personne` ( `nom_complet`, `role`, `login`, `password`, `matricule`, `adresse`, `sexe`) VALUES (?,?,?,?,?,?,?);";
+            $result=$db->executeUpdate($sql,[$this->nomComplet, parent::$role, $this->login, $this->password,$this->matricule,$this->adresse,$this->sexe]);
+        $db->deconnexionBD();
+        return $result;        
+    }
+
 }

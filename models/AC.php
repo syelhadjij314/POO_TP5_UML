@@ -1,4 +1,8 @@
 <?php
+namespace App\Model;
+
+use App\Core\Constantes;
+
 class AC extends Users{
     //Attributs naviagationnes=>attributs issus des relations
     //OneToMany=>Inscription
@@ -14,7 +18,27 @@ class AC extends Users{
     
     public function __construct()
     {
-        $this -> role= "ROLE_AC";
+        parent:: $role= Constantes::AC;
         $this -> inscriptions = [];
+    }
+    public function insert():int
+    {
+        $db=parent::database();
+        $db->connexionBD();
+        //Requete non preparee:variable injectee lors de l'ecriture de la requete
+            $sql="INSERT INTO `personne` (`nom_complet`,`role`, `login`, `password`) VALUES (?,?,?,?);";
+            $result=$db->executeUpdate($sql,[$this->nomComplet, parent::$role, $this->login, $this->password]);
+        $db->deconnexionBD();
+        return $result;        
+    }
+
+    public static function findAll(): array
+    {
+        $db=parent::database();
+        $db->connexionBD();
+            $sql = "select * from ". parent::table() ." where role like ?";
+            $results=$db->executeSelect($sql,[Constantes::AC]);
+        $db->deconnexionBD();
+        return $results;
     }
 }

@@ -1,5 +1,9 @@
 <?php
-class AnneeScolaire{
+namespace App\Model;
+
+use App\Core\Model;
+
+class AnneeScolaire extends Model{
     //Fonctions navigationnelles
 
     //OneToMany
@@ -7,3 +11,4 @@ class AnneeScolaire{
         return [];
     }
 }
+//reflection classe

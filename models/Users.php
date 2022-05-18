@@ -1,7 +1,8 @@
 <?php
+namespace App\Model;
+
 abstract class Users extends Personne
 {
-    
     protected string $login;
     protected string $password;
 
@@ -21,7 +22,6 @@ abstract class Users extends Personne
     public function setLogin($login)
     {
         $this->login = $login;
-
         return $this;
     }
 
@@ -41,18 +41,15 @@ abstract class Users extends Personne
     public function setPassword($password)
     {
         $this->password = $password;
-
         return $this;
     }
-
-    
 
     /**
      * Get the value of role
      */ 
-    public function getRole()
+    public static function getRole()
     {
-        return $this->role;
+        return self::$role;
     }
 
     /**
@@ -63,7 +60,17 @@ abstract class Users extends Personne
     public function setRole($role)
     {
         $this->role = $role;
-
         return $this;
+    }
+    public static function findUserByLoginAndPassword(string $login,string $password):object|null
+    {
+        return parent::findBy("select * from personne where login=? and password=?",[$login,$password],true);
+    }
+
+     //Redefinition
+    public static function findAll():array
+    {
+        $sql = "select `nom_complet`,`role`,`login`,`password` from ".parent::table()." where role not like PROF ";
+        return parent::findBy($sql);
     }
 }

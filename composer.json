@@ -1,0 +1,19 @@
+{
+    "name": "elhadji314/poo_tp5_uml",
+    "autoload": {
+        "psr-4": {
+            "App\\Core\\": "core/",
+            "App\\Model\\": "models/",
+            "App\\Controller\\": "controllers/",
+            "App\\Exception\\": "exceptions/"
+        }
+    },
+    "authors": [
+        {
+            "name": "elhadji314",
+            "email": "syelaj314@gmail.com"
+        }
+    ],
+    "require": {
+    }
+}
