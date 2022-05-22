@@ -15,7 +15,7 @@ class Controller {
         //Dans une vue $request
         ob_start();
             extract($data);
-
+            $url_base = Constantes::WEB_ROOT;
             require_once(Constantes::ROOT()."templates/".$path);
             $content_for_views=ob_get_clean();
             require_once(Constantes::ROOT()."templates/layout/base.html.php");

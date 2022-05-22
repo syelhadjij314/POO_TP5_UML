@@ -4,7 +4,8 @@ use App\Core\Controller;
 
 class ACController extends Controller{
 
-    public function inscriptions(){
+    public function inscriptions():array{
         
+        return [];
     }
 }

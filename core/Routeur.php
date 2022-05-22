@@ -1,6 +1,9 @@
 <?php
 namespace App\Core;
 
+use App\Controller\SecuriteController;
+use App\Core\Request;
+use App\Core\Session;
 use App\Exception\RouteNotFoundException;
 
 class Routeur{
@@ -22,19 +25,39 @@ class Routeur{
         // dd($uri);
         if (isset($this->routes[$uri])) {
             $route=$this->routes[$uri];
-            //Operation de destruction
-            [$ctrClass,$action]=$route;
-            // dd($ctrClass);
-            if (class_exists($ctrClass) && method_exists($ctrClass,$action)) {
-                $ctrl = new $ctrClass($this->request);//$ctrl = new SecuriteController()
-                // $ctrl->{$action()};//$ctrl->authentification()
+            [$ctrlClass,$action]=$route;
+            if (class_exists($ctrlClass) && method_exists($ctrlClass,$action)){
+                $ctrl = new $ctrlClass($this->request);
+                //Les vues accessibles sans connexion
+                // Pour que toutes les pages accessibles ajouter * dans le tableau
+                $home = ["SecurityController/authentification"];
+                //extraire la
+
+                $hometest=explode("\\",$ctrl::class)[2]."/".$action;
+            // dd($ctrl::class);
+                if (in_array("*",$home) || in_array($hometest,$home)) { //les Pages accessibles par Tout le monde
+                    call_user_func(array($ctrl,$action));
+                }elseif(Session::isConnect()){ // Tester si session existe
                 call_user_func(array($ctrl,$action));
-            }else {
+                }else {
+                    //Redirection vers login
+                    // call_user_func(array($ctrl,$action));
+                    die("connexion page");
+
+                }
+            }else{
                 throw new RouteNotFoundException();
             }
+        }
+        else{
+            if($this->request->getUri()[0]=="") {
+                $securite = new SecuriteController($this->request);
+                call_user_func(array($securite, "authentification"));
+                
+            }else {
+                throw new RouteNotFoundException();
 
-        }else {
-            throw new RouteNotFoundException();
+            }
         } 
     }
 }

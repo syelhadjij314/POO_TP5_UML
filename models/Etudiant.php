@@ -1,6 +1,5 @@
 <?php
 namespace App\Model;
-
 use App\Core\Constantes;
 
 class Etudiant extends Users

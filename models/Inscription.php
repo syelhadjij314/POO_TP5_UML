@@ -30,4 +30,14 @@ class Inscription extends Model{
             and i.id=?";
         return parent::findById($sql,[$this->id]);
     }
+
+    public static function findAll(): array
+    {
+        $db=parent::database();
+        $db->connexionBD();
+            $sql = "select * from ".parent::table()."";           
+            $results=$db->executeSelect($sql);
+        $db->deconnexionBD();
+        return $results;
+    }    
 }

@@ -41,4 +41,9 @@ Class Session{
 
         return $this;
     }
+
+    public static function isConnect()
+    {
+        return isset($_SESSION['user-connect']);
+    }
 }

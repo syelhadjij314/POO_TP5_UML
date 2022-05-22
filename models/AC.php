@@ -15,7 +15,10 @@ class AC extends Users{
     public function inscriptions():array{
         return [];
     }
-    
+
+    public function inscription(){
+        
+    }
     public function __construct()
     {
         parent:: $role= Constantes::AC;
@@ -40,5 +43,27 @@ class AC extends Users{
             $results=$db->executeSelect($sql,[Constantes::AC]);
         $db->deconnexionBD();
         return $results;
+        
+    }
+    
+
+    /**
+     * Get the value of inscriptions
+     */ 
+    public function getInscriptions()
+    {
+        return $this->inscriptions;
+    }
+
+    /**
+     * Set the value of inscriptions
+     *
+     * @return  self
+     */ 
+    public function setInscriptions($inscriptions)
+    {
+        $this->inscriptions = $inscriptions;
+
+        return $this;
     }
 }

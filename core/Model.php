@@ -64,4 +64,14 @@ abstract class Model implements IModel{
         $db->deconnexionBD();
         return $result;
     }
+    public static function findAlls($attributes="*",$column="",$search="")
+    {
+        $db=self::database();
+        $db->connexionBD();
+            $sql= ($column !="" && $search !="") ? "select $attributes from ".self::table()." where $column like '$search'":
+                "select $attributes from ".self::table();
+            $result=$db->executeSelect($sql);
+        $db->deconnexionBD();
+        return $result;
+    }
 }
