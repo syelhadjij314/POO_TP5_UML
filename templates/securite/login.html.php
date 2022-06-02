@@ -1,4 +1,7 @@
 <div class="section">
+    <!-- <div class="titre">
+        <h1>GESTION D'INSCRIPTION ETUDIANTS</h1>
+    </div> -->
     <div class="container">
         <div class="row full-height justify-content-center">
             <div class="col-12 text-center align-self-center py-5">
@@ -9,7 +12,7 @@
                                 <div class="center-wrap">
                                     <div class="section text-center">
                                         <h4 class="mb-4 pb-3">Log In</h4>
-                                        <form method="post" action="login">
+                                        <form method="post" action="">
 
                                             <div class="form-group">
                                                 <input type="text" name="login" class="form-style" placeholder="Login" id="logemail" autocomplete="off">

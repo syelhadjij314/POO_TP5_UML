@@ -12,7 +12,7 @@ abstract class Model implements IModel{
     {
         $table= get_called_class();
         $table=str_replace("App\\Model\\","",$table);
-        $table = ($table=="Users" or $table=="AC" or $table=="RP" or $table=="Professeur")?"personne":strtolower($table);
+        $table = ($table=="Users" or $table=="AC" or $table=="RP" or $table=="Professeur" or $table=="Etudiant")?"personne":strtolower($table);
         return $table;
     }
 
@@ -43,7 +43,7 @@ abstract class Model implements IModel{
         $db->deconnexionBD();
         return $result;
     }
-    public static function findById(int $id):object|null
+    public static function findById(int $id):object|null|array
     {
         $db=self::database();
         $db->connexionBD();
@@ -52,7 +52,7 @@ abstract class Model implements IModel{
         // ? => 0, ? => 1
 
             $sql="select * from ".self::table()." where id= ?";
-            $result=$db->executeSelect($sql,['$id']);
+            $result=$db->executeSelect($sql,[$id]);
         $db->deconnexionBD();
         return $result;
     }

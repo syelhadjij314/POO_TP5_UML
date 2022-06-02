@@ -15,17 +15,15 @@ class SecuriteController extends Controller{
             $this->render('securite/login.html.php');
         }else {
             extract($_POST);
-
             $user= Users::findUserByLoginAndPassword($login,$password);
             if ($user) {
                 $_SESSION['user-connect']= $user;
+                $this->redirectToRoute("accueil");
                 // var_dump($user); die;
-                $this->redirectToRoute("liste-professeur");
             }else {
                 header("location:".Constantes::WEB_ROOT."login"); 
             }
         }
-
         // Traitement apres soumission => POST
     }
 

@@ -1,40 +1,59 @@
-<div class="container">
-    <div class="card bg-secondary mt-4">
-        <div class="card-body">
-            <h4 class="card-title">Demande d'annulation d'inscription</h4>
-            <p class="card-text">
-            <form class="row g-3">
-                <div class="col-6">
-                    <label for="inputAddress" class="form-label">Libelle classe</label>
-                    <input type="text" class="form-control bg-success" id="inputAddress" placeholder="634 Main St">
-                </div>
-                <div class="col-6">
-                    <label for="inputAddress2" class="form-label">Filiere</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                </div>
+<div class="section">
+    <div class="container">
+        <div class="row full-height justify-content-center">
+            <div class="col-12 text-center align-self-center py-5">
+                <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                    <div class="card-3d-wrap mx-auto">
+                        <div class="card-3d-wrapper">
+                            <div class="card-front">
+                                <div class="center-wrap">
+                                    <form  method="POST" action="<?=$action?>">
+                                        <div class="section text-start">
+                                            <h4 class="mb-4 pb-3">Ajouter une Classe</h4>
+                                            <div class="form-group">
+                                                <label for="validationCustom03" class="form-label">Libelle Classe</label>
+                                                <input type="text" value="<?= isset($classe->libelleClasse)? $classe->libelleClasse: "" ?>" class="form-style" placeholder="" id="" name="libelleClasse">
+                                                <i class="input-icon uil uil-at"></i>
 
-                <div class="col-6">
-                    <label for="inputState" class="form-label">Niveau</label>
-                    <select id="inputState" class="form-select">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="validationCustom04" class="form-label">Filiere</label>
+                                                
+                                                <select class="form-select" id="validationCustom04" name="filiere" required>
+                                                    <?php foreach ($classes as $maClasse):?>
+                                                        <option value="<?= isset($classe->filiere)? $classe->filiere:""?>"> <?= $maClasse->filiere ?> </option>
+                                                    <?php endforeach ?>
 
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="col-6">
-                    <label for="inputZip" class="form-label">RP</label>
-                    <select id="inputState" class="form-select">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </div>
+                                                </select>
+                                                <i class="input-icon uil uil-at"></i>
 
-                <div class="col-12">
-                    <button type="submit" class="btn btn-success">Creer classe</button>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="validationCustom04" class="form-label">Niveau</label>
+                                                <select class="form-select" id="validationCustom04" name="niveau" required>
+                                                    <option value="<?= isset($classe->niveau)? $classe->niveau: "" ?>">L1</option>
+                                                    <option value="<?= isset($classe->niveau)? $classe->niveau: "" ?>">L2</option>
+                                                    <option value="<?= isset($classe->niveau)? $classe->niveau: "" ?>">L3</option>
+                                                    <option value="<?= isset($classe->niveau)? $classe->niveau: "" ?>">M1</option>
+                                                    <option value="<?= isset($classe->niveau)? $classe->niveau: "" ?>">M2</option>
+
+                                                </select>
+                                                <i class="input-icon uil uil-at"></i>
+
+                                            </div>
+
+                                            <button type="submit" value="<?= isset($classe->id)? "Modifier": "Ajouter" ?>"class="btn mt-4">Ajouter</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-            </form>
-            </p>
+            </div>
         </div>
     </div>
-
 </div>

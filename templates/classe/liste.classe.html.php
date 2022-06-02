@@ -1,7 +1,9 @@
 <div class="card mt-4 bg-secondary">
     <div class="card-body">
         <h4 class="card-title">Liste des Classes</h4>
-        <button type="button" class="btn" style="float: right; margin-top: -2rem;">Ajouter Classe</button
+        <a class="btn" href="<?= $url_base ?>add-classe" style="float: right; margin-top: -3rem;">
+            <i class="fa-solid fa-plus"></i>
+        </a>
         <p class="card-text">
         <table class="table table-warning table-striped">
             <thead>
@@ -14,19 +16,25 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data as $classe):?>
+                
+                <?php foreach ($classes as $classe) : ?>
                     <tr>
-                        <td><?= $classe->libelleClasse?></td>
+                        <td><?= $classe->libelleClasse ?></td>
                         <td><?= $classe->filiere ?></td>
                         <td><?= $classe->niveau ?></td>
-                        <td><button type="button" class="btn" style="background-color: red;">delete</button></td>
-                        <td><button type="button" class="btn" style="background-color: grey;">Modifier</button></td>
+                        <td id="actions">
+                            <form action="<?= $url_base ?>delete-classe" method="POST">
+                                <input type="hidden" name="id" value="<?= $classe->id ?>">
+                                <button type="submit" id="btn-delete"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+                            <a href="<?= $Constantes::WEB_ROOT."edit-classe/".$classe->id ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </td>
 
                     </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
-        
+
         </p>
     </div>
 </div>

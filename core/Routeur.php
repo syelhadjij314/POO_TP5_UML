@@ -23,39 +23,38 @@ class Routeur{
     public function resolve(){
         $uri = "/".$this->request->getUri()[0];
         // dd($uri);
-        if (isset($this->routes[$uri])) {
+        if (isset($this->routes[$uri])){
             $route=$this->routes[$uri];
             [$ctrlClass,$action]=$route;
             if (class_exists($ctrlClass) && method_exists($ctrlClass,$action)){
                 $ctrl = new $ctrlClass($this->request);
                 //Les vues accessibles sans connexion
                 // Pour que toutes les pages accessibles ajouter * dans le tableau
-                $home = ["SecurityController/authentification"];
+                $home = ["SecuriteController/authentification"];
                 //extraire la
 
                 $hometest=explode("\\",$ctrl::class)[2]."/".$action;
             // dd($ctrl::class);
                 if (in_array("*",$home) || in_array($hometest,$home)) { //les Pages accessibles par Tout le monde
                     call_user_func(array($ctrl,$action));
-                }elseif(Session::isConnect()){ // Tester si session existe
-                call_user_func(array($ctrl,$action));
-                }else {
+                }else 
+                    if(Session::isConnect()){ // Tester si session existe
+                        call_user_func(array($ctrl,$action));
+                    }else{
                     //Redirection vers login
-                    // call_user_func(array($ctrl,$action));
-                    die("connexion page");
-
+                    header("location:".Constantes::WEB_ROOT."login");                   
+                    }
+                }else{
+                    throw new RouteNotFoundException();
                 }
-            }else{
-                throw new RouteNotFoundException();
             }
-        }
-        else{
-            if($this->request->getUri()[0]=="") {
-                $securite = new SecuriteController($this->request);
-                call_user_func(array($securite, "authentification"));
+            else{
+                if($this->request->getUri()[0]=="") {
+                    $securite = new SecuriteController($this->request);
+                    call_user_func(array($securite, "authentification"));
                 
-            }else {
-                throw new RouteNotFoundException();
+                }else {
+                    throw new RouteNotFoundException();
 
             }
         } 

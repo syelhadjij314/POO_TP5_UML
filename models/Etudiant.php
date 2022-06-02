@@ -10,7 +10,7 @@ class Etudiant extends Users
 
     public function __construct()
     {
-        parent:: $role= Constantes::ETUDIANT;
+        parent::$role= Constantes::ETUDIANT;
     }
 
 
@@ -82,6 +82,11 @@ class Etudiant extends Users
             $result=$db->executeUpdate($sql,[$this->nomComplet, parent::$role, $this->login, $this->password,$this->matricule,$this->adresse,$this->sexe]);
         $db->deconnexionBD();
         return $result;        
+    }
+    public static function findAll():array
+    {
+        $sql = "select * from ".parent::table()." where role like ?";
+        return parent::findBy($sql,[Constantes::ETUDIANT]);
     }
 
 }

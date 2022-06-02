@@ -9,6 +9,10 @@ class Role{
         $this->session=$session;
     }
 
+    public static function  getRole(){
+        return $_SESSION['user-connect']->role;
+    }
+
     public static function  isConnect(){
 
     }

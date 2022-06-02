@@ -3,7 +3,22 @@ namespace App\Model;
 use App\Core\Model;
 
 class Classe extends Model
+
 {
+
+    private string $libelleClasse;
+    private string $filiere;
+    private string $niveau;
+
+    public function __construct($id,$libelleClasse,$filiere,$niveau)
+    {
+        $this->id->$id;
+        $this->libelleClasse = $libelleClasse;
+        $this->filiere=$filiere;
+        $this->niveau=$niveau;
+
+    }
+
     //Fonctions navigationnelles
     //ManyToMany => Professeur
     public function professeurs():array|null
@@ -18,7 +33,7 @@ class Classe extends Model
         $db=parent::database();
         $db->connexionBD();
         //Requete non preparee:variable injectee lors de l'ecriture de la requete
-            $sql="INSERT INTO `classe` (`libelleClasse`, `filiere`, `niveau`,`rp_id`) VALUES
+            /* $sql="INSERT INTO `classe` (`libelleClasse`, `filiere`, `niveau`,`rp_id`) VALUES
             ('Classe8', 'Physique', 'L2',19),
             ('CAD', 'Mathematique', 'L2',19),
             ('Rose', 'Informatique', 'L1',20),
@@ -32,10 +47,13 @@ class Classe extends Model
             ('Classe4', 'Physique', 'M1',20),
             ('Classe5', 'Mathematique', 'L3',19),
             ('Classe6', 'Physique', 'L3',19),
-            ('Classe7', 'Chimie', 'L2',19)";
+            ('Classe7', 'Chimie', 'L2',19)"; */
 
-            $result=$db->executeUpdate($sql);
+            $sql="INSERT INTO `classe` (`libelleClasse`, `filiere`, `niveau`,`rp_id`) VALUES(?,?,?,?)";
+
+            $result=$db->executeUpdate($sql,[$this->libelleClasse,$this->filiere,$this->niveau,20]);
         $db->deconnexionBD();
         return $result;        
     }
+    
 }

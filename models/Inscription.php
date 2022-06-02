@@ -35,8 +35,11 @@ class Inscription extends Model{
     {
         $db=parent::database();
         $db->connexionBD();
-            $sql = "select * from ".parent::table()."";           
-            $results=$db->executeSelect($sql);
+            $sql = "select p.nom_complet,cl.libelleClasse,cl.filiere,cl.niveau,i.etat from inscription i,personne p,classe cl where 
+            p.id=i.etudiant_id
+            and cl.id=i.classe_id
+            and role like ?";           
+            $results=$db->executeSelect($sql,["ROLE_ETUDIANT"]);
         $db->deconnexionBD();
         return $results;
     }    

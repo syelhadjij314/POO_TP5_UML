@@ -15,5 +15,6 @@
         }
     ],
     "require": {
+        "symfony/validator": "^6.0"
     }
 }

@@ -1,7 +1,3 @@
-<?php
-    use App\Model\Module;
-    $modules=Module::findAll();
-?>
 <div class="card bg-secondary mt-5">
     <div class="card-body">
         <h4 class="card-title">Liste des Modules</h4>
@@ -19,9 +15,10 @@
             <tr>
                 <td><?= $module->libelleModule?></td>
                 <td><?= $module->nom_complet?></td>
-                <td><button type="button" class="btn" style="background-color:grey;">delete</button></td>
-                <td><button type="button" class="btn" style="background-color:grey;">modifier</button></td>
-
+                <td>
+                    <button type="button" class="btn" style="background-color:grey;">delete</button>
+                    <button type="button" class="btn" style="background-color:grey;">modifier</button>
+                </td>
             </tr>
             <?php endforeach ?>                
             </tbody>

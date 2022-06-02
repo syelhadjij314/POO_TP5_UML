@@ -8,20 +8,22 @@
                     <th scope="col">Nom Complet</th>
                     <th scope="col">Grade</th>
                     <th scope="col">Actions</th>
-
                 </tr>
             </thead>
+            
+            <?php foreach ($prof as $professeur ):?>
             <tbody>
-            <?php foreach ($data as $professeur):?>
             <tr>
                 <td><?= $professeur->nom_complet?></td>
                 <td><?= $professeur->grade?></td>
-                <td><button type="button" class="btn" style="background-color: grey;">Affecter Classe</button></td>
-                <td><button type="button" class="btn" style="background-color: grey;">Modifier</button></td>
-
+                <td>
+                    <button type="button" class="btn" style="background-color: grey;">Affecter Classe</button>
+                    <button type="button" class="btn" style="background-color: grey;">Modifier</button>
+                </td>
             </tr>
-            <?php endforeach ?>                
-            </tbody>
+        </tbody>
+        <?php endforeach ?>   
+            
         </table>
         </p>
     </div>

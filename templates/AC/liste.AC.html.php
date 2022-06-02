@@ -1,34 +1,27 @@
-<?php
-use App\Model\AC;
-$acs=AC::findAll();
-
-?>
-<div class="card" card-align>
+<div class="card mt-4 bg-secondary">
     <div class="card-body">
         <h4 class="card-title">Liste des AC</h4>
         <p class="card-text">
-        <table class="table">
+        <table class="table table-warning table-striped">
             <thead>
                 <tr>
                     <th scope="col">Nom Complet</th>
-                    <th scope="col">Role</th>
-                    <th scope="col">Login</th>
-                    <th scope="col">Password</th>
-
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($acs as $ac):?>
-            <tr>
-                <td><?= $ac->nom_complet?></td>
-                <td><?= $ac->role?></td>
-                <td><?= $ac->login?></td>
-                <td><?= $ac->password?></td>
-            </tr>
-            <?php endforeach ?>
-                
+                <?php foreach ($acs as $ac):?>
+                    <tr>
+                        <td><?= $ac->nom_complet?></td>
+                        <td><button type="button" class="btn" style="background-color: red;">delete</button>
+                            <button type="button" class="btn" style="background-color: grey;">Modifier</button>
+                        </td>
+
+                    </tr>
+                <?php endforeach ?>
             </tbody>
         </table>
+        
         </p>
     </div>
 </div>
